@@ -40,7 +40,7 @@ function Resolve-Sts2GameRoot {
 
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $gameRoot = Resolve-Sts2GameRoot -ProjectRoot $projectRoot -ExplicitGameRoot $GameRoot
-$projectFile = Join-Path $projectRoot "RegentPipeSfx.csproj"
+$projectFile = Join-Path $projectRoot "RegentWithASteelPipe.csproj"
 $packProjectDir = Join-Path $projectRoot "pack"
 $outputDir = Join-Path $gameRoot "mods\\RegentWithASteelPipe"
 $legacyOutputDir = Join-Path $gameRoot "mods\\RegentPipeSfx"
@@ -48,7 +48,6 @@ $outputDll = Join-Path $outputDir "RegentWithASteelPipe.dll"
 $outputPck = Join-Path $outputDir "RegentWithASteelPipe.pck"
 $tempPck = Join-Path $projectRoot "bin\\Release\\RegentWithASteelPipe.pck"
 $godotExe = Join-Path $gameRoot "SlayTheSpire2.exe"
-$relativePackProjectDir = ".\\mod_projects\\RegentPipeSfx\\pack"
 $relativePackScript = "pack_mod.gd"
 $prepareScript = Join-Path $projectRoot "prepare_assets.py"
 

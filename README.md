@@ -50,6 +50,12 @@ From the repository root:
 .\build.ps1
 ```
 
+Or:
+
+```powershell
+.\build.ps1 -GameRoot 'D:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2'
+```
+
 This will:
 
 - preprocess the blade image
