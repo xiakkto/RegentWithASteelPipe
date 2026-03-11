@@ -1,0 +1,9 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.pdb
+*.cache
+Thumbs.db
+pack/images/steel_pipe_blade_runtime.png
