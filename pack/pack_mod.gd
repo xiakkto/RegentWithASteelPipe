@@ -13,7 +13,6 @@ func _init() -> void:
 	manifest_source_dir = manifest_source_dir.replace("\\", "/")
 	output_pck = output_pck.replace("\\", "/")
 
-	var manifest_path := manifest_source_dir.path_join("mod_manifest.json")
 	var audio_path := manifest_source_dir.path_join("audio/steel_pipe.ogg")
 	var card_path := manifest_source_dir.path_join("images/steel_pipe_card.png")
 	var blade_path := manifest_source_dir.path_join("images/steel_pipe_blade_runtime.png")
@@ -28,12 +27,6 @@ func _init() -> void:
 	var err := packer.pck_start(output_pck)
 	if err != OK:
 		push_error("pck_start failed: %s" % err)
-		quit(1)
-		return
-
-	err = packer.add_file("res://mod_manifest.json", manifest_path)
-	if err != OK:
-		push_error("add_file manifest failed: %s" % err)
 		quit(1)
 		return
 

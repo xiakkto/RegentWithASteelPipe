@@ -2,6 +2,8 @@
 
 A Slay the Spire 2 joke mod that turns Regent's forge/refine/Sovereign Blade into steel-pipe nonsense.
 
+Current release target: `v0.2.0` for the `v0.99.0+` external-manifest mod format.
+
 ## What It Changes
 
 - Replaces Regent forge audio with `steel_pipe.ogg`
@@ -61,7 +63,9 @@ This will:
 - preprocess the blade image
 - build the DLL
 - build the PCK
-- copy both outputs into `mods\RegentWithASteelPipe` under your game install
+- copy `codex.regent_with_a_steel_pipe.dll` into `mods\RegentWithASteelPipe`
+- copy `codex.regent_with_a_steel_pipe.pck` into `mods\RegentWithASteelPipe`
+- copy `codex.regent_with_a_steel_pipe.json` into `mods\RegentWithASteelPipe`
 
 ## Repo Contents
 
@@ -84,3 +88,11 @@ Do not upload:
 - the full game directory
 - anything under `data_sts2_windows_x86_64/`
 - any copied game binaries
+
+## v0.99.0+ Structure
+
+This mod now uses the newer external manifest structure:
+
+- `codex.regent_with_a_steel_pipe.json`
+- `codex.regent_with_a_steel_pipe.dll`
+- `codex.regent_with_a_steel_pipe.pck`

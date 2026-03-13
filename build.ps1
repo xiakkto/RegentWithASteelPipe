@@ -41,12 +41,16 @@ function Resolve-Sts2GameRoot {
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $gameRoot = Resolve-Sts2GameRoot -ProjectRoot $projectRoot -ExplicitGameRoot $GameRoot
 $projectFile = Join-Path $projectRoot "RegentWithASteelPipe.csproj"
+$manifestTemplate = Join-Path $projectRoot "codex.regent_with_a_steel_pipe.json"
 $packProjectDir = Join-Path $projectRoot "pack"
 $outputDir = Join-Path $gameRoot "mods\\RegentWithASteelPipe"
 $legacyOutputDir = Join-Path $gameRoot "mods\\RegentPipeSfx"
-$outputDll = Join-Path $outputDir "RegentWithASteelPipe.dll"
-$outputPck = Join-Path $outputDir "RegentWithASteelPipe.pck"
-$tempPck = Join-Path $projectRoot "bin\\Release\\RegentWithASteelPipe.pck"
+$outputDll = Join-Path $outputDir "codex.regent_with_a_steel_pipe.dll"
+$outputPck = Join-Path $outputDir "codex.regent_with_a_steel_pipe.pck"
+$outputManifest = Join-Path $outputDir "codex.regent_with_a_steel_pipe.json"
+$legacyNamedDll = Join-Path $outputDir "RegentWithASteelPipe.dll"
+$legacyNamedPck = Join-Path $outputDir "RegentWithASteelPipe.pck"
+$tempPck = Join-Path $projectRoot "bin\\Release\\codex.regent_with_a_steel_pipe.pck"
 $godotExe = Join-Path $gameRoot "SlayTheSpire2.exe"
 $relativePackScript = "pack_mod.gd"
 $prepareScript = Join-Path $projectRoot "prepare_assets.py"
@@ -66,6 +70,12 @@ if ((Test-Path $legacyOutputDir) -and ($legacyOutputDir -ne $outputDir)) {
 
 New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
 Copy-Item $builtDll $outputDll -Force
+Copy-Item $manifestTemplate $outputManifest -Force
+foreach ($legacyPath in @($legacyNamedDll, $legacyNamedPck)) {
+    if (Test-Path $legacyPath) {
+        Remove-Item $legacyPath -Force
+    }
+}
 
 if (Test-Path $tempPck) {
     Remove-Item $tempPck -Force
@@ -95,3 +105,4 @@ Copy-Item $tempPck $outputPck -Force
 Write-Host "Built mod:"
 Write-Host "  $outputDll"
 Write-Host "  $outputPck"
+Write-Host "  $outputManifest"

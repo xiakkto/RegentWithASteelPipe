@@ -1,7 +1,11 @@
 {
-  "pck_name": "RegentWithASteelPipe",
+  "id": "codex.regent_with_a_steel_pipe",
   "name": "Regent With A Steel Pipe",
   "author": "Local",
   "description": "Forge, Sovereign Blade, card art, and orbiting blade visuals all become steel-pipe nonsense.",
-  "version": "0.1.0"
+  "version": "0.2.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": true
 }

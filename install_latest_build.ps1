@@ -41,11 +41,15 @@ function Resolve-Sts2GameRoot {
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $gameRoot = Resolve-Sts2GameRoot -ProjectRoot $projectRoot -ExplicitGameRoot $GameRoot
 $builtDll = Join-Path $projectRoot "bin\\Release\\RegentWithASteelPipe.dll"
-$builtPck = Join-Path $projectRoot "bin\\Release\\RegentWithASteelPipe.pck"
+$builtPck = Join-Path $projectRoot "bin\\Release\\codex.regent_with_a_steel_pipe.pck"
+$manifestTemplate = Join-Path $projectRoot "codex.regent_with_a_steel_pipe.json"
 $targetDir = Join-Path $gameRoot "mods\\RegentWithASteelPipe"
 $legacyTargetDir = Join-Path $gameRoot "mods\\RegentPipeSfx"
-$targetDll = Join-Path $targetDir "RegentWithASteelPipe.dll"
-$targetPck = Join-Path $targetDir "RegentWithASteelPipe.pck"
+$targetDll = Join-Path $targetDir "codex.regent_with_a_steel_pipe.dll"
+$targetPck = Join-Path $targetDir "codex.regent_with_a_steel_pipe.pck"
+$targetManifest = Join-Path $targetDir "codex.regent_with_a_steel_pipe.json"
+$legacyNamedDll = Join-Path $targetDir "RegentWithASteelPipe.dll"
+$legacyNamedPck = Join-Path $targetDir "RegentWithASteelPipe.pck"
 
 if (-not (Test-Path $builtDll)) {
     throw "Build output not found: $builtDll"
@@ -62,7 +66,14 @@ if ((Test-Path $legacyTargetDir) -and ($legacyTargetDir -ne $targetDir)) {
 New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 Copy-Item $builtDll $targetDll -Force
 Copy-Item $builtPck $targetPck -Force
+Copy-Item $manifestTemplate $targetManifest -Force
+foreach ($legacyPath in @($legacyNamedDll, $legacyNamedPck)) {
+    if (Test-Path $legacyPath) {
+        Remove-Item $legacyPath -Force
+    }
+}
 
 Write-Host "Installed latest build:"
 Write-Host "  $targetDll"
 Write-Host "  $targetPck"
+Write-Host "  $targetManifest"
